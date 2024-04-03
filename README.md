@@ -4,28 +4,67 @@
 
 Access Github and request a pull, [link](https://github.com/J-Bunny560/holbertonschool-binary_trees) to install to get function package.
 
-## Function Prototypes
+### Header
+```C#ifndef BINARY_TREES_H
+#define BINARY_TREES_H
 
-All function prototypes used to compile are included in the header file:
+#include <stddef.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+/**
+ * struct binary_tree_s - Binary tree node
+ *
+ * @n: Integer stored in the node
+ * @parent: Pointer to the parent node
+ * @left: Pointer to the left child node
+ * @right: Pointer to the right child node
+ */
+struct binary_tree_s
+{
+    int n;
+    struct binary_tree_s *parent;
+    struct binary_tree_s *left;
+    struct binary_tree_s *right;
+};
 
-- binary_tree_t *binary_tree_node(binary_tree_t*parent, int value);
-- binary_tree_t *binary_tree_insert_left(binary_tree_t*parent, int value);
-- binary_tree_t *binary_tree_insert_right(binary_tree_t*parent, int value);
--void binary_tree_delete(binary_tree_t *tree);
-- int binary_tree_is_leaf(const binary_tree_t *node);
+typedef struct binary_tree_s binary_tree_t;
+void binary_tree_print(const binary_tree_t *);
+binary_tree_t *binary_tree_node(binary_tree_t *parent, int value);
+binary_tree_t *binary_tree_insert_left(binary_tree_t *parent, int value);
+binary_tree_t *binary_tree_insert_right(binary_tree_t *parent, int value);
+void binary_tree_delete(binary_tree_t *tree);
+int binary_tree_is_leaf(const binary_tree_t *node);
+int binary_tree_is_root(const binary_tree_t *node);
+void binary_tree_preorder(const binary_tree_t *tree, void (*func)(int));
+void binary_tree_inorder(const binary_tree_t *tree, void (*func)(int));
+void binary_tree_postorder(const binary_tree_t *tree, void (*func)(int));
+size_t binary_tree_height(const binary_tree_t *tree);
+size_t binary_tree_depth(const binary_tree_t *tree);
+size_t binary_tree_size(const binary_tree_t *tree);
+size_t binary_tree_leaves(const binary_tree_t *tree);
+size_t binary_tree_nodes(const binary_tree_t *tree);
+int binary_tree_balance(const binary_tree_t *tree);
+int binary_tree_is_full(const binary_tree_t *tree);
+int binary_tree_is_perfect(const binary_tree_t *tree);
+binary_tree_t *binary_tree_sibling(binary_tree_t *node);
+binary_tree_t *binary_tree_uncle(binary_tree_t *node);
 
-## Tasks
-###  0. Tread lightly, she is near
+#endif /* BINARY_TREES_H */
+```
 
-Write a function that reads a text file and prints it to the `POSIX` standard output.
+## Task
 
-- Prototype: `ssize_t read_textfile(const char *filename, size_t letters);`
--   where letters is the number of letters it should read and print
--   returns the actual number of letters it could read and print
-- if the file can not be opened or read, return `0`
-- if `filename` is `NULL` return `0`
-- if `write` fails or does not write the expected amount of bytes, return `0`
+###  0. New node
 
+
+Write a function that creates a binary tree node
+
+-   Prototype: `binary_tree_t *binary_tree_node(binary_tree_t *parent, int value);`
+-   Where `parent` is a pointer to the parent node of the node to create
+-   And `value` is the value to put in the new node
+-   When created, a node does not have any child
+-   Your function must return a pointer to the new node, or `NULL` on failure
 ### 1. Insert left
 
 Write a function that inserts a node as the left-child of another node
